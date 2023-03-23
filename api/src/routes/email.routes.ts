@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { updateEmailController } from '../controllers/email.controllers';
+import {
+  deleteEmailController,
+  updateEmailController,
+} from '../controllers/email.controllers';
 import ensureAuthMiddleware from '../middlewares/ensureAuth.middleware';
 import ensureDataIsValidMiddleware from '../middlewares/ensureDataIsValid.middleware';
 import ensureUserTokenIsExistMiddleware from '../middlewares/ensureUserTokenIsExist.middleware';
@@ -13,6 +16,12 @@ emailRouter.patch(
   ensureUserTokenIsExistMiddleware,
   ensureDataIsValidMiddleware(emailSerializer),
   updateEmailController,
+);
+emailRouter.delete(
+  '/:id',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  deleteEmailController,
 );
 
 export default emailRouter;

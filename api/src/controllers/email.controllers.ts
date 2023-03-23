@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import deleteEmailService from '../services/email/deleteEmail.service';
 import updateEmailService from '../services/email/updateEmail.service';
 
 const updateEmailController = async (req: Request, res: Response) => {
@@ -6,4 +7,9 @@ const updateEmailController = async (req: Request, res: Response) => {
   return res.json(email);
 };
 
-export { updateEmailController };
+const deleteEmailController = async (req: Request, res: Response) => {
+  await deleteEmailService(req.params.id);
+  return res.status(204).json({});
+};
+
+export { updateEmailController, deleteEmailController };
