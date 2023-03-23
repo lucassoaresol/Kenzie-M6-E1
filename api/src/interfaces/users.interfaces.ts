@@ -1,3 +1,5 @@
+import { IEmailResponse } from './email.interfaces';
+
 export interface IReqUser {
   id: string;
 }
@@ -18,4 +20,5 @@ export interface IUserResponse {
   id: string;
   fullName: string;
   username: string;
+  listEmail: Array<IEmailResponse>;
 }

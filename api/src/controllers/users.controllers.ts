@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import createEmailService from '../services/email/createEmail.service';
 import createUserService from '../services/users/createUser.service';
 import deleteUserService from '../services/users/deleteUser.service';
 import retrieveUserService from '../services/users/retrieveUser.service';
@@ -24,9 +25,15 @@ const deleteUserController = async (req: Request, res: Response) => {
   return res.status(204).json({});
 };
 
+const createEmailController = async (req: Request, res: Response) => {
+  const email = await createEmailService(req.body, req.user.id);
+  return res.status(201).json(email);
+};
+
 export {
   createUserController,
   retrieveUserController,
   updateUserController,
   deleteUserController,
+  createEmailController,
 };

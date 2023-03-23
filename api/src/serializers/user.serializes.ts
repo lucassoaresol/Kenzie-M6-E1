@@ -5,6 +5,7 @@ import {
   IUserResponse,
   IUserUpdateRequest,
 } from '../interfaces/users.interfaces';
+import { emailResponserSerializer } from './email.serializes';
 
 const userSerializer: SchemaOf<IUserRequest> = yup.object().shape({
   fullName: yup.string().required(),
@@ -24,6 +25,7 @@ const userUpdateSerializer: SchemaOf<IUserUpdateRequest> = yup
 
 const userResponserSerializer: SchemaOf<IUserResponse> = yup.object().shape({
   createdAt: yup.date(),
+  listEmail: yup.array(emailResponserSerializer),
   username: yup.string(),
   fullName: yup.string(),
   id: yup.string().uuid(),
