@@ -1,7 +1,17 @@
+export interface IReqUser {
+  id: string;
+}
+
 export interface IUserRequest {
   fullName: string;
   username: string;
   password: string;
+}
+
+export interface IUserUpdateRequest {
+  fullName?: string;
+  username?: string;
+  password?: string;
 }
 
 export interface IUserResponse {
