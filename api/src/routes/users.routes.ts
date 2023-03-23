@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createUserController,
+  retrieveUserController,
   updateUserController,
 } from '../controllers/users.controllers';
 import ensureAuthMiddleware from '../middlewares/ensureAuth.middleware';
@@ -17,6 +18,12 @@ userRouter.post(
   '',
   ensureDataIsValidMiddleware(userSerializer),
   createUserController,
+);
+userRouter.get(
+  '',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  retrieveUserController,
 );
 userRouter.patch(
   '',

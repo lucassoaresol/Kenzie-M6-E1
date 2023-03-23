@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import createUserService from '../services/users/createUser.service';
+import retrieveUserService from '../services/users/retrieveUser.service';
 import updateUserService from '../services/users/updateUser.service';
 
 const createUserController = async (req: Request, res: Response) => {
@@ -7,9 +8,14 @@ const createUserController = async (req: Request, res: Response) => {
   return res.status(201).json(user);
 };
 
+const retrieveUserController = async (req: Request, res: Response) => {
+  const user = await retrieveUserService(req.user.id);
+  return res.json(user);
+};
+
 const updateUserController = async (req: Request, res: Response) => {
   const user = await updateUserService(req.body, req.user.id);
   return res.json(user);
 };
 
-export { createUserController, updateUserController };
+export { createUserController, retrieveUserController, updateUserController };
