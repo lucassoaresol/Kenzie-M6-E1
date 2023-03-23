@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createUserController,
+  deleteUserController,
   retrieveUserController,
   updateUserController,
 } from '../controllers/users.controllers';
@@ -31,6 +32,12 @@ userRouter.patch(
   ensureUserTokenIsExistMiddleware,
   ensureDataIsValidMiddleware(userUpdateSerializer),
   updateUserController,
+);
+userRouter.delete(
+  '',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  deleteUserController,
 );
 
 export default userRouter;
