@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   createContactController,
   createEmailController,
+  createPhoneController,
   deleteContactController,
   retrieveContactController,
   updateContactController,
@@ -11,6 +12,7 @@ import ensureDataIsValidMiddleware from '../middlewares/ensureDataIsValid.middle
 import ensureUserTokenIsExistMiddleware from '../middlewares/ensureUserTokenIsExist.middleware';
 import { contactSerializer } from '../serializers/contact.serializes';
 import { emailSerializer } from '../serializers/email.serializes';
+import { phoneSerializer } from '../serializers/phone.serializes';
 
 const contactRouter = Router();
 
@@ -46,6 +48,13 @@ contactRouter.post(
   ensureUserTokenIsExistMiddleware,
   ensureDataIsValidMiddleware(emailSerializer),
   createEmailController,
+);
+contactRouter.post(
+  '/:id/phone',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  ensureDataIsValidMiddleware(phoneSerializer),
+  createPhoneController,
 );
 
 export default contactRouter;

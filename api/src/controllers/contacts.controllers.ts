@@ -5,6 +5,7 @@ import listContactsService from '../services/contacts/listContacts.service';
 import retrieveContactService from '../services/contacts/retrieveContact.service';
 import updateContactService from '../services/contacts/updateContact.service';
 import createEmailService from '../services/email/createEmail.service';
+import createPhoneService from '../services/phone/createPhone.service';
 
 const createContactController = async (req: Request, res: Response) => {
   const contact = await createContactService(req.body, req.user.id);
@@ -36,6 +37,11 @@ const createEmailController = async (req: Request, res: Response) => {
   return res.status(201).json(email);
 };
 
+const createPhoneController = async (req: Request, res: Response) => {
+  const phone = await createPhoneService(req.body, null, req.params.id);
+  return res.status(201).json(phone);
+};
+
 export {
   createContactController,
   retrieveContactController,
@@ -43,4 +49,5 @@ export {
   deleteContactController,
   listContactsController,
   createEmailController,
+  createPhoneController,
 };

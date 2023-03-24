@@ -5,6 +5,7 @@ import {
   IContactResponse,
 } from '../interfaces/contacts.interface';
 import { emailResponserSerializer } from './email.serializes';
+import { phoneResponserSerializer } from './phone.serializes';
 
 const contactSerializer: SchemaOf<IContactRequest> = yup.object().shape({
   fullName: yup.string().required(),
@@ -14,6 +15,7 @@ const contactResponserSerializer: SchemaOf<IContactResponse> = yup
   .object()
   .shape({
     createdAt: yup.date(),
+    listPhoneNumber: yup.array(phoneResponserSerializer),
     listEmail: yup.array(emailResponserSerializer),
     fullName: yup.string(),
     id: yup.string().uuid(),
