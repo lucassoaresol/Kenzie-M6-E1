@@ -1,9 +1,14 @@
+import AppError from '../../errors/AppError';
 import prisma from '../../prisma';
 
 const deleteContactService = async (contactId: string) => {
-  await prisma.contact.delete({
-    where: { id: contactId },
-  });
+  try {
+    await prisma.contact.delete({
+      where: { id: contactId },
+    });
+  } catch {
+    throw new AppError('contact not found', 404);
+  }
 };
 
 export default deleteContactService;
