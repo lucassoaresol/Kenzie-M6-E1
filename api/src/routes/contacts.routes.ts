@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createContactController,
+  createEmailController,
   deleteContactController,
   retrieveContactController,
   updateContactController,
@@ -9,6 +10,7 @@ import ensureAuthMiddleware from '../middlewares/ensureAuth.middleware';
 import ensureDataIsValidMiddleware from '../middlewares/ensureDataIsValid.middleware';
 import ensureUserTokenIsExistMiddleware from '../middlewares/ensureUserTokenIsExist.middleware';
 import { contactSerializer } from '../serializers/contact.serializes';
+import { emailSerializer } from '../serializers/email.serializes';
 
 const contactRouter = Router();
 
@@ -37,6 +39,13 @@ contactRouter.delete(
   ensureAuthMiddleware,
   ensureUserTokenIsExistMiddleware,
   deleteContactController,
+);
+contactRouter.post(
+  '/:id/email',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  ensureDataIsValidMiddleware(emailSerializer),
+  createEmailController,
 );
 
 export default contactRouter;
