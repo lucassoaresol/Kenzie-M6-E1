@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { listContactsController } from '../controllers/contacts.controllers';
 import {
   createEmailController,
   createPhoneController,
@@ -56,6 +57,12 @@ userRouter.post(
   ensureUserTokenIsExistMiddleware,
   ensureDataIsValidMiddleware(phoneSerializer),
   createPhoneController,
+);
+userRouter.get(
+  '/contacts',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  listContactsController,
 );
 
 export default userRouter;

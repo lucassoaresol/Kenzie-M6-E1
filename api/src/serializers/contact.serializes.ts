@@ -17,4 +17,11 @@ const contactResponserSerializer: SchemaOf<IContactResponse> = yup
     id: yup.string().uuid(),
   });
 
-export { contactSerializer, contactResponserSerializer };
+const listContactsSerializer: yup.ArraySchema<SchemaOf<IContactResponse>> =
+  yup.array(contactResponserSerializer);
+
+export {
+  contactSerializer,
+  contactResponserSerializer,
+  listContactsSerializer,
+};
