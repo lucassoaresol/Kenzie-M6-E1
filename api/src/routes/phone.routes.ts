@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { updatePhoneController } from '../controllers/phone.controllers';
+import {
+  deletePhoneController,
+  updatePhoneController,
+} from '../controllers/phone.controllers';
 import ensureAuthMiddleware from '../middlewares/ensureAuth.middleware';
 import ensureDataIsValidMiddleware from '../middlewares/ensureDataIsValid.middleware';
 import ensureUserTokenIsExistMiddleware from '../middlewares/ensureUserTokenIsExist.middleware';
@@ -13,6 +16,12 @@ phoneRouter.patch(
   ensureUserTokenIsExistMiddleware,
   ensureDataIsValidMiddleware(phoneSerializer),
   updatePhoneController,
+);
+phoneRouter.delete(
+  '/:id',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  deletePhoneController,
 );
 
 export default phoneRouter;

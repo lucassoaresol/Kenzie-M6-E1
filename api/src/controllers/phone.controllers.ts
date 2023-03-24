@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import deletePhoneService from '../services/phone/deletePhone.service';
 import updatePhoneService from '../services/phone/updatePhone.service';
 
 const updatePhoneController = async (req: Request, res: Response) => {
@@ -6,4 +7,9 @@ const updatePhoneController = async (req: Request, res: Response) => {
   return res.json(phone);
 };
 
-export { updatePhoneController };
+const deletePhoneController = async (req: Request, res: Response) => {
+  await deletePhoneService(req.params.id);
+  return res.status(204).json({});
+};
+
+export { updatePhoneController, deletePhoneController };
