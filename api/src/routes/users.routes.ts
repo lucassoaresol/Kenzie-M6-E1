@@ -2,15 +2,19 @@ import { Router } from 'express';
 import { listContactsController } from '../controllers/contacts.controllers';
 import {
   createEmailUserController,
-  deleteEmailUserController,
   updateEmailUserController,
+  deleteEmailUserController,
 } from '../controllers/email.controllers';
 import {
-  createPhoneController,
+  createPhoneUserController,
+  updatePhoneUserController,
+  deletePhoneUserController,
+} from '../controllers/phone.controllers';
+import {
   createUserController,
-  deleteUserController,
   retrieveUserController,
   updateUserController,
+  deleteUserController,
 } from '../controllers/users.controllers';
 import ensureAuthMiddleware from '../middlewares/ensureAuth.middleware';
 import ensureDataIsValidMiddleware from '../middlewares/ensureDataIsValid.middleware';
@@ -48,13 +52,6 @@ userRouter.delete(
   ensureUserTokenIsExistMiddleware,
   deleteUserController,
 );
-userRouter.post(
-  '/phone',
-  ensureAuthMiddleware,
-  ensureUserTokenIsExistMiddleware,
-  ensureDataIsValidMiddleware(phoneSerializer),
-  createPhoneController,
-);
 userRouter.get(
   '/contacts',
   ensureAuthMiddleware,
@@ -81,6 +78,27 @@ userRouter.delete(
   ensureAuthMiddleware,
   ensureUserTokenIsExistMiddleware,
   deleteEmailUserController,
+);
+
+userRouter.post(
+  '/phone',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  ensureDataIsValidMiddleware(phoneSerializer),
+  createPhoneUserController,
+);
+userRouter.patch(
+  '/phone/:id',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  ensureDataIsValidMiddleware(phoneSerializer),
+  updatePhoneUserController,
+);
+userRouter.delete(
+  '/phone/:id',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  deletePhoneUserController,
 );
 
 export default userRouter;
