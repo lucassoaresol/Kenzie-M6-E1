@@ -1,12 +1,16 @@
 import { Router } from 'express';
 import {
   createContactController,
-  createEmailController,
   createPhoneController,
   deleteContactController,
   retrieveContactController,
   updateContactController,
 } from '../controllers/contacts.controllers';
+import {
+  createEmailContactController,
+  deleteEmailContactController,
+  updateEmailContactController,
+} from '../controllers/email.controllers';
 import ensureAuthMiddleware from '../middlewares/ensureAuth.middleware';
 import ensureDataIsValidMiddleware from '../middlewares/ensureDataIsValid.middleware';
 import ensureUserTokenIsExistMiddleware from '../middlewares/ensureUserTokenIsExist.middleware';
@@ -46,18 +50,32 @@ contactRouter.delete(
   deleteContactController,
 );
 contactRouter.post(
-  '/:id/email',
-  ensureAuthMiddleware,
-  ensureUserTokenIsExistMiddleware,
-  ensureDataIsValidMiddleware(emailSerializer),
-  createEmailController,
-);
-contactRouter.post(
   '/:id/phone',
   ensureAuthMiddleware,
   ensureUserTokenIsExistMiddleware,
   ensureDataIsValidMiddleware(phoneSerializer),
   createPhoneController,
+);
+
+contactRouter.post(
+  '/:id/email',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  ensureDataIsValidMiddleware(emailSerializer),
+  createEmailContactController,
+);
+contactRouter.patch(
+  '/:contactId/email/:emailId',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  ensureDataIsValidMiddleware(emailSerializer),
+  updateEmailContactController,
+);
+contactRouter.delete(
+  '/:contactId/email/:emailId',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  deleteEmailContactController,
 );
 
 export default contactRouter;

@@ -1,7 +1,11 @@
 import { Router } from 'express';
 import { listContactsController } from '../controllers/contacts.controllers';
 import {
-  createEmailController,
+  createEmailUserController,
+  deleteEmailUserController,
+  updateEmailUserController,
+} from '../controllers/email.controllers';
+import {
   createPhoneController,
   createUserController,
   deleteUserController,
@@ -45,13 +49,6 @@ userRouter.delete(
   deleteUserController,
 );
 userRouter.post(
-  '/email',
-  ensureAuthMiddleware,
-  ensureUserTokenIsExistMiddleware,
-  ensureDataIsValidMiddleware(emailSerializer),
-  createEmailController,
-);
-userRouter.post(
   '/phone',
   ensureAuthMiddleware,
   ensureUserTokenIsExistMiddleware,
@@ -63,6 +60,27 @@ userRouter.get(
   ensureAuthMiddleware,
   ensureUserTokenIsExistMiddleware,
   listContactsController,
+);
+
+userRouter.post(
+  '/email',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  ensureDataIsValidMiddleware(emailSerializer),
+  createEmailUserController,
+);
+userRouter.patch(
+  '/email/:id',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  ensureDataIsValidMiddleware(emailSerializer),
+  updateEmailUserController,
+);
+userRouter.delete(
+  '/email/:id',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  deleteEmailUserController,
 );
 
 export default userRouter;
