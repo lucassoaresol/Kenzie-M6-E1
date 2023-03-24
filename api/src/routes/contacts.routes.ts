@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   createContactController,
   retrieveContactController,
+  updateContactController,
 } from '../controllers/contacts.controllers';
 import ensureAuthMiddleware from '../middlewares/ensureAuth.middleware';
 import ensureDataIsValidMiddleware from '../middlewares/ensureDataIsValid.middleware';
@@ -22,6 +23,13 @@ contactRouter.get(
   ensureAuthMiddleware,
   ensureUserTokenIsExistMiddleware,
   retrieveContactController,
+);
+contactRouter.patch(
+  '/:id',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  ensureDataIsValidMiddleware(contactSerializer),
+  updateContactController,
 );
 
 export default contactRouter;
