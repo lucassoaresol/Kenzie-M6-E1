@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { createContactController } from '../controllers/contacts.controllers';
+import {
+  createContactController,
+  retrieveContactController,
+} from '../controllers/contacts.controllers';
 import ensureAuthMiddleware from '../middlewares/ensureAuth.middleware';
 import ensureDataIsValidMiddleware from '../middlewares/ensureDataIsValid.middleware';
 import ensureUserTokenIsExistMiddleware from '../middlewares/ensureUserTokenIsExist.middleware';
@@ -13,6 +16,12 @@ contactRouter.post(
   ensureUserTokenIsExistMiddleware,
   ensureDataIsValidMiddleware(contactSerializer),
   createContactController,
+);
+contactRouter.get(
+  '/:id',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  retrieveContactController,
 );
 
 export default contactRouter;
