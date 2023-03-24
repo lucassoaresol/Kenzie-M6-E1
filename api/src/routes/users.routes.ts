@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createEmailController,
+  createPhoneController,
   createUserController,
   deleteUserController,
   retrieveUserController,
@@ -10,6 +11,7 @@ import ensureAuthMiddleware from '../middlewares/ensureAuth.middleware';
 import ensureDataIsValidMiddleware from '../middlewares/ensureDataIsValid.middleware';
 import ensureUserTokenIsExistMiddleware from '../middlewares/ensureUserTokenIsExist.middleware';
 import { emailSerializer } from '../serializers/email.serializes';
+import { phoneSerializer } from '../serializers/phone.serializes';
 import {
   userSerializer,
   userUpdateSerializer,
@@ -47,6 +49,13 @@ userRouter.post(
   ensureUserTokenIsExistMiddleware,
   ensureDataIsValidMiddleware(emailSerializer),
   createEmailController,
+);
+userRouter.post(
+  '/phone',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  ensureDataIsValidMiddleware(phoneSerializer),
+  createPhoneController,
 );
 
 export default userRouter;

@@ -1,4 +1,5 @@
 import { IEmailResponse } from './email.interfaces';
+import { IPhoneResponse } from './phone.interfaces';
 
 export interface IReqUser {
   id: string;
@@ -21,4 +22,5 @@ export interface IUserResponse {
   fullName: string;
   username: string;
   listEmail: Array<IEmailResponse>;
+  listPhoneNumber: Array<IPhoneResponse>;
 }
