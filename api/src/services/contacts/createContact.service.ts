@@ -3,11 +3,17 @@ import prisma from '../../prisma';
 import { contactResponserSerializer } from '../../serializers/contact.serializes';
 
 const createContactService = async (
-  contactData: IContactRequest,
+  { fullName, listEmail, listPhoneNumber }: IContactRequest,
   userId: string,
 ) => {
   const contact = await prisma.contact.create({
-    data: { ...contactData, userId },
+    data: {
+      fullName,
+      userId,
+      listEmail: { createMany: { data: listEmail } },
+      listPhoneNumber: { createMany: { data: listPhoneNumber } },
+    },
+    include: { listEmail: true, listPhoneNumber: true },
   });
 
   return await contactResponserSerializer.validate(contact, {

@@ -3,13 +3,22 @@ import { SchemaOf } from 'yup';
 import {
   IContactRequest,
   IContactResponse,
+  IContactUpdateRequest,
 } from '../interfaces/contacts.interface';
-import { emailResponserSerializer } from './email.serializes';
-import { phoneResponserSerializer } from './phone.serializes';
+import { emailResponserSerializer, emailSerializer } from './email.serializes';
+import { phoneResponserSerializer, phoneSerializer } from './phone.serializes';
 
 const contactSerializer: SchemaOf<IContactRequest> = yup.object().shape({
   fullName: yup.string().required(),
+  listEmail: yup.array(emailSerializer).required(),
+  listPhoneNumber: yup.array(phoneSerializer).required(),
 });
+
+const contactUpdateSerializer: SchemaOf<IContactUpdateRequest> = yup
+  .object()
+  .shape({
+    fullName: yup.string().required(),
+  });
 
 const contactResponserSerializer: SchemaOf<IContactResponse> = yup
   .object()
@@ -26,6 +35,7 @@ const listContactsSerializer: yup.ArraySchema<SchemaOf<IContactResponse>> =
 
 export {
   contactSerializer,
+  contactUpdateSerializer,
   contactResponserSerializer,
   listContactsSerializer,
 };

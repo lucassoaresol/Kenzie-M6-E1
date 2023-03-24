@@ -1,7 +1,13 @@
-import { IEmailResponse } from './email.interfaces';
-import { IPhoneResponse } from './phone.interfaces';
+import { IEmailRequest, IEmailResponse } from './email.interfaces';
+import { IPhoneRequest, IPhoneResponse } from './phone.interfaces';
 
 export interface IContactRequest {
+  fullName: string;
+  listEmail: Array<IEmailRequest>;
+  listPhoneNumber: Array<IPhoneRequest>;
+}
+
+export interface IContactUpdateRequest {
   fullName: string;
 }
 

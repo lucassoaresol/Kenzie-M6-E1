@@ -1,10 +1,10 @@
 import AppError from '../../errors/AppError';
-import { IContactRequest } from '../../interfaces/contacts.interface';
+import { IContactUpdateRequest } from '../../interfaces/contacts.interface';
 import prisma from '../../prisma';
 import { contactResponserSerializer } from '../../serializers/contact.serializes';
 
 const updateContactService = async (
-  contactData: IContactRequest,
+  contactData: IContactUpdateRequest,
   contactId: string,
 ) => {
   try {

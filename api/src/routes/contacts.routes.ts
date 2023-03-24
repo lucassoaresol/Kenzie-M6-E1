@@ -10,7 +10,10 @@ import {
 import ensureAuthMiddleware from '../middlewares/ensureAuth.middleware';
 import ensureDataIsValidMiddleware from '../middlewares/ensureDataIsValid.middleware';
 import ensureUserTokenIsExistMiddleware from '../middlewares/ensureUserTokenIsExist.middleware';
-import { contactSerializer } from '../serializers/contact.serializes';
+import {
+  contactSerializer,
+  contactUpdateSerializer,
+} from '../serializers/contact.serializes';
 import { emailSerializer } from '../serializers/email.serializes';
 import { phoneSerializer } from '../serializers/phone.serializes';
 
@@ -33,7 +36,7 @@ contactRouter.patch(
   '/:id',
   ensureAuthMiddleware,
   ensureUserTokenIsExistMiddleware,
-  ensureDataIsValidMiddleware(contactSerializer),
+  ensureDataIsValidMiddleware(contactUpdateSerializer),
   updateContactController,
 );
 contactRouter.delete(
