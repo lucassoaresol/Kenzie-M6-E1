@@ -23,4 +23,5 @@ export interface IUserResponse {
   username: string;
   listEmail: Array<IEmailResponse>;
   listPhoneNumber: Array<IPhoneResponse>;
+  createdAt: Date;
 }
