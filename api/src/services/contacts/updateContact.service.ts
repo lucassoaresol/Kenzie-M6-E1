@@ -6,14 +6,18 @@ import { contactResponserSerializer } from '../../serializers/contact.serializes
 const updateContactService = async (
   contactData: IContactUpdateRequest,
   contactId: string,
+  userId: string,
 ) => {
   try {
-    const contact = await prisma.contact.update({
-      where: { id: contactId },
-      data: contactData,
+    const user = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        contacts: { update: { where: { id: contactId }, data: contactData } },
+      },
+      include: { contacts: true },
     });
 
-    return await contactResponserSerializer.validate(contact, {
+    return await contactResponserSerializer.validate(user.contacts[0], {
       stripUnknown: true,
     });
   } catch {

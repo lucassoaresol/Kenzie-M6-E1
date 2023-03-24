@@ -2,9 +2,9 @@ import AppError from '../../errors/AppError';
 import prisma from '../../prisma';
 import { contactResponserSerializer } from '../../serializers/contact.serializes';
 
-const retrieveContactService = async (contactId: string) => {
-  const contact = await prisma.contact.findUnique({
-    where: { id: contactId },
+const retrieveContactService = async (contactId: string, userId: string) => {
+  const contact = await prisma.contact.findFirst({
+    where: { id: contactId, userId },
     include: { listEmail: true, listPhoneNumber: true },
   });
 

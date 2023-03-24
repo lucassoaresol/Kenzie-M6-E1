@@ -13,17 +13,21 @@ const createContactController = async (req: Request, res: Response) => {
 };
 
 const retrieveContactController = async (req: Request, res: Response) => {
-  const contact = await retrieveContactService(req.params.id);
+  const contact = await retrieveContactService(req.params.id, req.user.id);
   return res.json(contact);
 };
 
 const updateContactController = async (req: Request, res: Response) => {
-  const contact = await updateContactService(req.body, req.params.id);
+  const contact = await updateContactService(
+    req.body,
+    req.params.id,
+    req.user.id,
+  );
   return res.json(contact);
 };
 
 const deleteContactController = async (req: Request, res: Response) => {
-  await deleteContactService(req.params.id);
+  await deleteContactService(req.params.id, req.user.id);
   return res.status(204).json({});
 };
 
