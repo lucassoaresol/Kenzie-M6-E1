@@ -1,5 +1,5 @@
-import { IEmailResponse } from './email.interfaces';
-import { IPhoneResponse } from './phone.interfaces';
+import { IEmailRequest, IEmailResponse } from './email.interfaces';
+import { IPhoneRequest, IPhoneResponse } from './phone.interfaces';
 
 export interface IReqUser {
   id: string;
@@ -9,6 +9,8 @@ export interface IUserRequest {
   fullName: string;
   username: string;
   password: string;
+  listEmail: Array<IEmailRequest>;
+  listPhoneNumber: Array<IPhoneRequest>;
 }
 
 export interface IUserUpdateRequest {

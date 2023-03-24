@@ -5,13 +5,15 @@ import {
   IUserResponse,
   IUserUpdateRequest,
 } from '../interfaces/users.interfaces';
-import { emailResponserSerializer } from './email.serializes';
-import { phoneResponserSerializer } from './phone.serializes';
+import { emailResponserSerializer, emailSerializer } from './email.serializes';
+import { phoneResponserSerializer, phoneSerializer } from './phone.serializes';
 
 const userSerializer: SchemaOf<IUserRequest> = yup.object().shape({
   fullName: yup.string().required(),
   password: yup.string().required(),
   username: yup.string().required(),
+  listEmail: yup.array(emailSerializer).required(),
+  listPhoneNumber: yup.array(phoneSerializer).required(),
 });
 
 const userUpdateSerializer: SchemaOf<IUserUpdateRequest> = yup
