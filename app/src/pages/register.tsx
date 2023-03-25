@@ -1,4 +1,4 @@
-import LoginPage from "@/components/LoginPage";
+import RegisterPage from "@/components/RegisterPage";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 import GlobalStyle from "@/styles/global";
 import { lightTheme, darkTheme } from "@/styles/theme";
@@ -17,7 +17,7 @@ export default function Home() {
       </Head>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <GlobalStyle />
-        <LoginPage />
+        <RegisterPage />
       </ThemeProvider>
     </>
   );
