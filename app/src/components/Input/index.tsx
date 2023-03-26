@@ -1,12 +1,13 @@
-import { useGlobalContext } from "@/contexts/GlobalContext";
 import {
+  UseFormRegisterReturn,
   FieldErrors,
   FieldValues,
-  UseFormRegisterReturn,
 } from "react-hook-form";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import ErrorsMessage from "./ErrorsMessage";
-import { StyledInput, StyledInputPassword } from "./styles";
+import Text from "./Text";
+import Password from "./Password";
+import View from "./View";
+import { StyledDiv, StyledInputPassword } from "./styles";
 
 type iInputProps = {
   id: string;
@@ -27,70 +28,35 @@ const Input = ({
   isPassword,
   isConfirm,
 }: iInputProps) => {
-  const { isView, setIsView } = useGlobalContext();
   return (
-    <StyledInput>
+    <StyledDiv>
       <label htmlFor={id}>{name}</label>
       {isConfirm ? (
-        <>
-          {isView ? (
-            <input
-              id={id}
-              type="text"
-              placeholder={placeholder}
-              {...register}
-            />
-          ) : (
-            <input
-              id={id}
-              type="password"
-              placeholder={placeholder}
-              {...register}
-            />
-          )}
-        </>
+        <View
+          inpText={
+            <Text id={id} placeholder={placeholder} register={register} />
+          }
+          inpPassword={
+            <Password id={id} placeholder={placeholder} register={register} />
+          }
+        />
+      ) : isPassword ? (
+        <StyledInputPassword>
+          <View
+            inpText={
+              <Text id={id} placeholder={placeholder} register={register} />
+            }
+            inpPassword={
+              <Password id={id} placeholder={placeholder} register={register} />
+            }
+            isPassword
+          />
+        </StyledInputPassword>
       ) : (
-        <>
-          {isPassword ? (
-            <StyledInputPassword>
-              {isView ? (
-                <>
-                  <input
-                    id={id}
-                    type="text"
-                    placeholder={placeholder}
-                    {...register}
-                  />
-                  <span onClick={() => setIsView(false)}>
-                    <FaEyeSlash />
-                  </span>
-                </>
-              ) : (
-                <>
-                  <input
-                    id={id}
-                    type="password"
-                    placeholder={placeholder}
-                    {...register}
-                  />
-                  <span onClick={() => setIsView(true)}>
-                    <FaEye />
-                  </span>
-                </>
-              )}
-            </StyledInputPassword>
-          ) : (
-            <input
-              id={id}
-              type="text"
-              placeholder={placeholder}
-              {...register}
-            />
-          )}
-        </>
+        <Text id={id} placeholder={placeholder} register={register} />
       )}
       <ErrorsMessage errors={errors} id={id} />
-    </StyledInput>
+    </StyledDiv>
   );
 };
 

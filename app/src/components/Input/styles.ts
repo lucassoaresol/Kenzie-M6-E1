@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledInput = styled.div`
+const StyledDiv = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -13,17 +13,18 @@ const StyledInput = styled.div`
       font-size: 13px;
     }
   }
-  input {
-    width: 100%;
-    height: 38.5px;
-    padding: 0 13px;
-    color: var(--Color-grey-0);
-    font-weight: 400;
-    font-size: 15px;
-    background-color: var(--Color-grey-2);
-    border: 1px solid var(--Color-grey-0);
-    border-radius: 3px;
-  }
+`;
+
+const StyledInput = styled.input`
+  width: 100%;
+  height: 38.5px;
+  padding: 0 13px;
+  color: var(--Color-grey-0);
+  font-weight: 400;
+  font-size: 15px;
+  background-color: var(--Color-grey-2);
+  border: 1px solid var(--Color-grey-0);
+  border-radius: 3px;
 `;
 
 const StyledInputPassword = styled.div`
@@ -47,4 +48,4 @@ const StyledInputPassword = styled.div`
   }
 `;
 
-export { StyledInput, StyledInputPassword };
+export { StyledDiv, StyledInput, StyledInputPassword };
