@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { StyledContent, StyledLoginPage } from "./styles";
 import { Inter } from "next/font/google";
 import Input from "../Input";
+import Button from "../Button";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,8 +56,18 @@ const LoginPage = () => {
               errors={errors}
               isPassword
             />
-            <button type="submit">Entrar</button>
+            <Button name="Entrar" type="submit" caseButton="primary" />
           </form>
+
+          <div>
+            <Link href="/register">Ainda não possui uma conta?</Link>
+            <Button
+              name="Cadastre-se"
+              type="button"
+              isLink
+              location="/register"
+            />
+          </div>
         </StyledContent>
       </StyledLoginPage>
     </div>

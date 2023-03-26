@@ -5,7 +5,7 @@ const StyledHeader = styled.div`
   justify-content: space-between;
   width: 100%;
   & > a > h1 {
-    color: var(--Color-text-primary);
+    color: var(--Color-primary);
   }
 `;
 

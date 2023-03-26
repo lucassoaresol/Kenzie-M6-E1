@@ -17,6 +17,8 @@ interface iGlobalContext {
   toggleTheme: () => void;
   isClickMobile: boolean;
   setIsClickMobile: Dispatch<SetStateAction<boolean>>;
+  isView: boolean;
+  setIsView: Dispatch<SetStateAction<boolean>>;
 }
 
 const GlobalContext = createContext<iGlobalContext>({} as iGlobalContext);
@@ -24,6 +26,7 @@ const GlobalContext = createContext<iGlobalContext>({} as iGlobalContext);
 const GlobalProvider = ({ children }: iGlobalProps) => {
   const [theme, setTheme] = useState("light");
   const [isClickMobile, setIsClickMobile] = useState(false);
+  const [isView, setIsView] = useState(false);
 
   const toggleTheme = () => {
     if (theme === "light") {
@@ -42,7 +45,14 @@ const GlobalProvider = ({ children }: iGlobalProps) => {
 
   return (
     <GlobalContext.Provider
-      value={{ theme, toggleTheme, isClickMobile, setIsClickMobile }}
+      value={{
+        theme,
+        toggleTheme,
+        isClickMobile,
+        setIsClickMobile,
+        isView,
+        setIsView,
+      }}
     >
       {children}
     </GlobalContext.Provider>
