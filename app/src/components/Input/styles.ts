@@ -4,13 +4,13 @@ const StyledDiv = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 15px;
   & > label {
     font-weight: 400;
     font-size: 10px;
     color: var(--Color-grey-0);
-    margin-bottom: 10px;
     @media (min-width: 768px) {
-      font-size: 13px;
+      font-size: 12px;
     }
   }
 `;
@@ -21,10 +21,15 @@ const StyledInput = styled.input`
   padding: 0 13px;
   color: var(--Color-grey-0);
   font-weight: 400;
-  font-size: 15px;
+  font-size: 13px;
   background-color: var(--Color-grey-2);
   border: 1px solid var(--Color-grey-0);
   border-radius: 3px;
+  @media (min-width: 768px) {
+    height: 48px;
+    padding: 0 16px;
+    font-size: 16px;
+  }
 `;
 
 const StyledInputPassword = styled.div`
@@ -34,16 +39,15 @@ const StyledInputPassword = styled.div`
   span {
     position: absolute;
     top: 50%;
-    right: 20px;
+    right: 12px;
     transform: translateY(-50%);
-    color: var(--Color-grey-0);
+    color: var(--Color-grey-1);
     cursor: pointer;
 
     font-size: 9.63px;
-  }
-  @media (min-width: 768px) {
-    span {
+    @media (min-width: 768px) {
       font-size: 12px;
+      right: 20px;
     }
   }
 `;

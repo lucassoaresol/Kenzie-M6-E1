@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
     }
     body{
         background-color: var(--Color-background);
+        font-family: 'Inter', sans-serif;
     }
     a{
         color: unset;

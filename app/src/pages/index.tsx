@@ -1,8 +1,8 @@
-import LoginPage from "@/components/LoginPage";
+import Head from "next/head";
+import LoginPage from "@/components/pages/Login";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 import GlobalStyle from "@/styles/global";
 import { lightTheme, darkTheme } from "@/styles/theme";
-import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 
 export default function Home() {

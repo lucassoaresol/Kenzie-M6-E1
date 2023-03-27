@@ -55,7 +55,7 @@ const Input = ({
       ) : (
         <Text id={id} placeholder={placeholder} register={register} />
       )}
-      <ErrorsMessage errors={errors} id={id} />
+      <ErrorsMessage message={errors[id]?.message} />
     </StyledDiv>
   );
 };

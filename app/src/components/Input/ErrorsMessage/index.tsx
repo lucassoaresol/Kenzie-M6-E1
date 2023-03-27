@@ -1,17 +1,19 @@
-import { FieldErrors, FieldValues } from "react-hook-form";
-import { IoMdInformationCircle } from "react-icons/io";
+import { FieldError, Merge, FieldErrorsImpl } from "react-hook-form";
 import { StyledErrorsMessage } from "./styles";
+import { IoMdInformationCircle } from "react-icons/io";
 
 interface iErrorsMessageProps {
-  errors: FieldErrors<FieldValues>;
-  id: string;
+  message:
+    | string
+    | FieldError
+    | Merge<FieldError, FieldErrorsImpl<any>>
+    | undefined;
 }
 
-const ErrorsMessage = ({ errors, id }: iErrorsMessageProps) => {
-  const message = errors[id]?.message;
+const ErrorsMessage = ({ message }: iErrorsMessageProps) => {
   return (
     <>
-      {errors[id] && typeof message == "string" && (
+      {typeof message == "string" && (
         <StyledErrorsMessage>
           {message}
           <span style={{ paddingTop: 2.2 }}>

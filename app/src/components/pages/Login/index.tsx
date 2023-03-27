@@ -1,14 +1,13 @@
-import Header from "../Header";
+import Link from "next/link";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { StyledContent, StyledLoginPage } from "./styles";
-import { Inter } from "next/font/google";
-import Input from "../Input";
-import Button from "../Button";
-import Link from "next/link";
-
-const inter = Inter({ subsets: ["latin"] });
+import Button from "@/components/Button";
+import Header from "@/components/Header";
+import Input from "@/components/Input";
+import Loading from "@/components/Loading";
+import { useGlobalContext } from "@/contexts/GlobalContext";
+import { StyledLoginPage, StyledContent } from "./styles";
 
 const schema = yup.object({
   login: yup.string().required("Login é obrigatório"),
@@ -16,6 +15,7 @@ const schema = yup.object({
 });
 
 const LoginPage = () => {
+  const { login } = useGlobalContext();
   const {
     register,
     handleSubmit,
@@ -23,7 +23,6 @@ const LoginPage = () => {
   } = useForm({ resolver: yupResolver(schema) });
   return (
     <div
-      className={inter.className}
       style={{
         width: "100vw",
         height: "100vh",
@@ -36,11 +35,7 @@ const LoginPage = () => {
         <Header />
         <StyledContent>
           <h2>Login</h2>
-          <form
-            onSubmit={handleSubmit((data) => {
-              console.log(data);
-            })}
-          >
+          <form onSubmit={handleSubmit(login)}>
             <Input
               id="login"
               name="Login"
@@ -70,6 +65,7 @@ const LoginPage = () => {
           </div>
         </StyledContent>
       </StyledLoginPage>
+      <Loading />
     </div>
   );
 };

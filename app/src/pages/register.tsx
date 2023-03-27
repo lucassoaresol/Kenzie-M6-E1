@@ -1,8 +1,8 @@
-import RegisterPage from "@/components/RegisterPage";
+import Head from "next/head";
+import RegisterPage from "@/components/pages/Register";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 import GlobalStyle from "@/styles/global";
 import { lightTheme, darkTheme } from "@/styles/theme";
-import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 
 export default function Home() {
