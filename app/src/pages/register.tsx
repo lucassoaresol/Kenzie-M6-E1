@@ -5,7 +5,7 @@ import GlobalStyle from "@/styles/global";
 import { lightTheme, darkTheme } from "@/styles/theme";
 import { ThemeProvider } from "styled-components";
 
-export default function Home() {
+export default function Register() {
   const { theme } = useGlobalContext();
   return (
     <>

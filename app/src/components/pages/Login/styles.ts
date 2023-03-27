@@ -1,14 +1,6 @@
 import styled from "styled-components";
 
 const StyledLoginPage = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 80%;
-  max-width: 370px;
-`;
-
-const StyledContent = styled.div`
   margin-top: 20px;
   width: 100%;
   display: flex;
@@ -70,4 +62,4 @@ const StyledContent = styled.div`
   }
 `;
 
-export { StyledLoginPage, StyledContent };
+export { StyledLoginPage };

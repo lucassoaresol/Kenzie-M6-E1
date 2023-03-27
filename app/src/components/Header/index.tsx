@@ -3,13 +3,17 @@ import Action from "./Action";
 import DarkMode from "./DarkMode";
 import { StyledHeader } from "./styles";
 
-const Header = () => {
+type iHeaderProps = {
+  isRegister?: boolean;
+};
+
+const Header = ({ isRegister }: iHeaderProps) => {
   return (
     <StyledHeader>
       <Link href="/">
         <h1>Kenzie-M6-E1</h1>
       </Link>
-      <Action />
+      <>{isRegister && <Action />}</>
       <DarkMode />
     </StyledHeader>
   );

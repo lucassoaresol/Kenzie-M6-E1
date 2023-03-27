@@ -1,20 +1,15 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import Link from "next/link";
 import * as yup from "yup";
-import {
-  FieldError,
-  FieldErrorsImpl,
-  Merge,
-  useFieldArray,
-  useForm,
-} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm, useFieldArray } from "react-hook-form";
+import { VscAdd, VscRemove } from "react-icons/vsc";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
-import Loading from "@/components/Loading";
-import { StyledRegisterPage, StyledContent, StyledList } from "./styles";
+import Text from "@/components/Input/Text";
 import ErrorsMessage from "@/components/Input/ErrorsMessage";
+import Loading from "@/components/Loading";
+import StyledPage from "@/styles/pages";
+import { StyledRegisterPage, StyledList } from "./styles";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 
 const schema = yup.object({
@@ -37,8 +32,8 @@ const schema = yup.object({
           .required("Email é obrigatório"),
       })
     )
-    .required("Must have fields")
-    .min(1, "Minimum of 1 field"),
+    .required()
+    .min(1),
   listPhoneNumber: yup
     .array()
     .of(
@@ -49,18 +44,13 @@ const schema = yup.object({
           .required("Contato é obrigatório"),
       })
     )
-    .required("Must have fields")
-    .min(1, "Minimum of 1 field"),
+    .required()
+    .min(1),
 });
 
 const RegisterPage = () => {
   const { createUser } = useGlobalContext();
-  let message: (
-    | string
-    | FieldError
-    | Merge<FieldError, FieldErrorsImpl<any>>
-    | undefined
-  )[] = [];
+  let message: (string | undefined)[] = [];
 
   const {
     register,
@@ -78,6 +68,7 @@ const RegisterPage = () => {
     },
     resolver: yupResolver(schema),
   });
+
   const listEmail = useFieldArray({
     control,
     name: "listEmail",
@@ -89,9 +80,9 @@ const RegisterPage = () => {
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      <StyledRegisterPage>
-        <Header />
-        <StyledContent>
+      <StyledPage style={{ maxWidth: "500px" }}>
+        <Header isRegister />
+        <StyledRegisterPage>
           <h2>Crie sua conta</h2>
           <p>Rapido e grátis, vamos nessa</p>
           <form onSubmit={handleSubmit(createUser)}>
@@ -127,15 +118,17 @@ const RegisterPage = () => {
             />
             <StyledList>
               <li>
-                <h3>Lista de Email</h3>
-                <button
-                  type="button"
-                  onClick={() => {
-                    listEmail.append({ email: "" });
-                  }}
-                >
-                  Adicionar
-                </button>
+                <div>
+                  <h3>Lista de Email</h3>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      listEmail.append({ email: "" });
+                    }}
+                  >
+                    <VscAdd />
+                  </button>
+                </div>
               </li>
               {listEmail.fields.map((item, index) => {
                 if (errors.listEmail) {
@@ -144,37 +137,37 @@ const RegisterPage = () => {
                 return (
                   <li key={item.id}>
                     <div>
-                      <input
+                      <Text
                         placeholder="Digite aqui seu email"
-                        {...register(`listEmail.${index}.email`)}
+                        register={register(`listEmail.${index}.email`)}
                       />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          listEmail.remove(index);
+                        }}
+                      >
+                        <VscRemove />
+                      </button>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        listEmail.remove(index);
-                      }}
-                    >
-                      Remover
-                    </button>
+                    <ErrorsMessage message={message[0]} />
                   </li>
                 );
               })}
-              <li>
-                <ErrorsMessage message={message[0]} />
-              </li>
             </StyledList>
             <StyledList>
               <li>
-                <h3>Lista de Contato</h3>
-                <button
-                  type="button"
-                  onClick={() => {
-                    listPhoneNumber.append({ phoneNumber: "" });
-                  }}
-                >
-                  Adicionar
-                </button>
+                <div>
+                  <h3>Lista de Contato</h3>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      listPhoneNumber.append({ phoneNumber: "" });
+                    }}
+                  >
+                    <VscAdd />
+                  </button>
+                </div>
               </li>
               {listPhoneNumber.fields.map((item, index) => {
                 if (errors.listPhoneNumber) {
@@ -184,30 +177,30 @@ const RegisterPage = () => {
                 return (
                   <li key={item.id}>
                     <div>
-                      <input
+                      <Text
                         placeholder="Digite aqui seu contato"
-                        {...register(`listPhoneNumber.${index}.phoneNumber`)}
+                        register={register(
+                          `listPhoneNumber.${index}.phoneNumber`
+                        )}
                       />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          listPhoneNumber.remove(index);
+                        }}
+                      >
+                        <VscRemove />
+                      </button>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        listPhoneNumber.remove(index);
-                      }}
-                    >
-                      Remove
-                    </button>
+                    <ErrorsMessage message={message[1]} />
                   </li>
                 );
               })}
-              <li>
-                <ErrorsMessage message={message[1]} />
-              </li>
             </StyledList>
             <Button name="Cadastrar" type="submit" caseButton="primary" />
           </form>
-        </StyledContent>
-      </StyledRegisterPage>
+        </StyledRegisterPage>
+      </StyledPage>
       <Loading />
     </div>
   );

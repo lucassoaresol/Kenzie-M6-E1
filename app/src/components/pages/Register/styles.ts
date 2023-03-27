@@ -1,15 +1,6 @@
 import styled from "styled-components";
 
 const StyledRegisterPage = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 80%;
-  max-width: 500px;
-  margin: 60px 0;
-`;
-
-const StyledContent = styled.div`
   margin-top: 20px;
   width: 100%;
   display: flex;
@@ -65,19 +56,27 @@ const StyledList = styled.ul`
   & > li {
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: flex-end;
     gap: 5px;
 
     &:last-child {
       justify-content: flex-end;
     }
 
-    &:nth-child(2) > button {
+    &:nth-child(2) > div > button {
       display: none;
     }
 
-    & > h3 {
+    & > div {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+    }
+
+    & > div > h3 {
       font-weight: 400;
       font-size: 10px;
       color: var(--Color-grey-0);
@@ -85,42 +84,21 @@ const StyledList = styled.ul`
         font-size: 12px;
       }
     }
-    & > button {
-      font-family: "Inter", sans-serif;
-      font-weight: 600;
-      font-size: 10px;
-      padding: 0 16px;
-      height: 30px;
+
+    & > div > button {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 10px;
+      height: 20px;
       color: var(--Color-grey-0);
       border-radius: 4px;
       background-color: var(--Color-grey-1);
-
-      @media (min-width: 768px) {
-        height: 40px;
-        font-size: 12px;
-      }
-    }
-    & > div {
-      width: 100%;
-
-      & > input {
-        width: 100%;
-        height: 38.5px;
-        padding: 0 13px;
-        color: var(--Color-grey-0);
-        font-weight: 400;
-        font-size: 13px;
-        background-color: var(--Color-grey-2);
-        border: 1px solid var(--Color-grey-0);
-        border-radius: 3px;
-        @media (min-width: 768px) {
-          height: 48px;
-          padding: 0 16px;
-          font-size: 16px;
-        }
+      & > svg {
+        width: 10px;
+        stroke-width: 1;
       }
     }
   }
 `;
 
-export { StyledRegisterPage, StyledContent, StyledList };
+export { StyledRegisterPage, StyledList };

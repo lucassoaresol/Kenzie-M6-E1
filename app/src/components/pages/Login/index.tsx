@@ -1,13 +1,14 @@
 import Link from "next/link";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
 import Loading from "@/components/Loading";
+import StyledPage from "@/styles/pages";
+import { StyledLoginPage } from "./styles";
 import { useGlobalContext } from "@/contexts/GlobalContext";
-import { StyledLoginPage, StyledContent } from "./styles";
 
 const schema = yup.object({
   login: yup.string().required("Login é obrigatório"),
@@ -24,16 +25,13 @@ const LoginPage = () => {
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100vh",
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
       }}
     >
-      <StyledLoginPage>
+      <StyledPage>
         <Header />
-        <StyledContent>
+        <StyledLoginPage>
           <h2>Login</h2>
           <form onSubmit={handleSubmit(login)}>
             <Input
@@ -63,8 +61,8 @@ const LoginPage = () => {
               location="/register"
             />
           </div>
-        </StyledContent>
-      </StyledLoginPage>
+        </StyledLoginPage>
+      </StyledPage>
       <Loading />
     </div>
   );

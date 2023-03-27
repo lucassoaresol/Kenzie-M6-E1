@@ -2,7 +2,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import { StyledInput } from "../styles";
 
 type iTextProps = {
-  id: string;
+  id?: string;
   placeholder: string;
   register: UseFormRegisterReturn<string>;
 };
