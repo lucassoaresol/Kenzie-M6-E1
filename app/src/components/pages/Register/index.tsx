@@ -10,7 +10,7 @@ import ErrorsMessage from "@/components/Input/ErrorsMessage";
 import Loading from "@/components/Loading";
 import StyledPage from "@/styles/pages";
 import { StyledRegisterPage, StyledList } from "./styles";
-import { useGlobalContext } from "@/contexts/GlobalContext";
+import { useUserContext } from "@/contexts/UserContext";
 
 const schema = yup.object({
   fullName: yup.string().required("Nome Completo é obrigatório"),
@@ -49,7 +49,7 @@ const schema = yup.object({
 });
 
 const RegisterPage = () => {
-  const { createUser } = useGlobalContext();
+  const { createUser } = useUserContext();
   let message: (string | undefined)[] = [];
 
   const {

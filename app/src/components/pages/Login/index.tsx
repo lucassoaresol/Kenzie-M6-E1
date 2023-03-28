@@ -8,7 +8,7 @@ import Input from "@/components/Input";
 import Loading from "@/components/Loading";
 import StyledPage from "@/styles/pages";
 import { StyledLoginPage } from "./styles";
-import { useGlobalContext } from "@/contexts/GlobalContext";
+import { useUserContext } from "@/contexts/UserContext";
 
 const schema = yup.object({
   login: yup.string().required("Login é obrigatório"),
@@ -16,7 +16,7 @@ const schema = yup.object({
 });
 
 const LoginPage = () => {
-  const { login } = useGlobalContext();
+  const { login } = useUserContext();
   const {
     register,
     handleSubmit,
