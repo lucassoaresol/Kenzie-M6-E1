@@ -1,3 +1,4 @@
+import { IContactResponse } from './contacts.interface';
 import { IEmailRequest, IEmailResponse } from './email.interfaces';
 import { IPhoneRequest, IPhoneResponse } from './phone.interfaces';
 
@@ -25,5 +26,6 @@ export interface IUserResponse {
   username: string;
   listEmail: Array<IEmailResponse>;
   listPhoneNumber: Array<IPhoneResponse>;
+  contacts:Array<IContactResponse>
   createdAt: Date;
 }
