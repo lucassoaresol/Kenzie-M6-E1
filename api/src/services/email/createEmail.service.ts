@@ -1,4 +1,4 @@
-import { ListEmail, User } from '@prisma/client';
+import { ListEmail } from '@prisma/client';
 import AppError from '../../errors/AppError';
 import { IEmailRequest } from '../../interfaces/email.interfaces';
 import prisma from '../../prisma';
@@ -25,7 +25,7 @@ const createEmailService = async (
         },
         include: { contacts: { include: { listEmail: true } } },
       });
-      email = user.contacts[0].listEmail.at(-1);
+      email = user.contacts.at(-1).listEmail.at(-1);
     } catch {
       throw new AppError('contact not found', 404);
     }

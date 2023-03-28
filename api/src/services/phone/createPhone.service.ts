@@ -25,7 +25,7 @@ const createPhoneService = async (
         },
         include: { contacts: { include: { listPhoneNumber: true } } },
       });
-      phone = user.contacts[0].listPhoneNumber.at(-1);
+      phone = user.contacts.at(-1).listPhoneNumber.at(-1);
     } catch {
       throw new AppError('contact not found', 404);
     }
