@@ -1,7 +1,8 @@
 import { iLogin, postLogin } from "@/services/apiLogin";
 import { postUserCreate } from "@/services/apiUser";
 import { useRouter } from "next/router";
-import { createContext, useContext, ReactNode } from "react";
+import { setCookie } from "nookies";
+import { createContext, useContext, ReactNode, useEffect } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "./GlobalContext";
@@ -25,7 +26,7 @@ const UserProvider = ({ children }: iUserProps) => {
     try {
       setGlobalLoading(true);
       const { token }: iLogin = await postLogin(data);
-      localStorage.setItem("@TokenKenzieM6E1", token);
+      setCookie(null, "@TokenKenzieM6E1", token);
       toast.success("Login feito com sucesso!", {
         autoClose: 900,
       });

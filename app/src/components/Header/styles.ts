@@ -12,6 +12,11 @@ const StyledHeader = styled.div`
       font-size: 22px;
     }
   }
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
 `;
 
 export { StyledHeader };

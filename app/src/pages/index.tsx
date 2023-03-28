@@ -1,11 +1,18 @@
+import { GetServerSideProps } from "next";
+import nookies from "nookies";
 import Head from "next/head";
-import LoginPage from "@/components/pages/Login";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 import GlobalStyle from "@/styles/global";
 import { lightTheme, darkTheme } from "@/styles/theme";
 import { ThemeProvider } from "styled-components";
+import HomePage from "@/components/pages/Home";
+import { getUser, iUser } from "@/services/apiUser";
 
-export default function Home() {
+export interface iHomeProps {
+  user: iUser;
+}
+
+export default function Home({ user }: iHomeProps) {
   const { theme } = useGlobalContext();
   return (
     <>
@@ -17,8 +24,31 @@ export default function Home() {
       </Head>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <GlobalStyle />
-        <LoginPage />
+        <HomePage user={user} />
       </ThemeProvider>
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const cookies = nookies.get(ctx);
+  const token = cookies["@TokenKenzieM6E1"];
+
+  if (!token) {
+    return {
+      redirect: { destination: "/login", permanent: false },
+    };
+  }
+
+  try {
+    const user = await getUser(token);
+
+    return {
+      props: { user: user },
+    };
+  } catch {
+    return {
+      redirect: { destination: "/login", permanent: false },
+    };
+  }
+};

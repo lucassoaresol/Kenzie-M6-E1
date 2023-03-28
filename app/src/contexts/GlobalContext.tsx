@@ -33,16 +33,16 @@ const GlobalProvider = ({ children }: iGlobalProps) => {
 
   const toggleTheme = () => {
     if (theme === "light") {
-      localStorage.setItem("@ThemeGetSoluções", "dark");
+      localStorage.setItem("@ThemeKenzieM6E1", "dark");
       setTheme("dark");
     } else {
-      localStorage.setItem("@ThemeGetSoluções", "light");
+      localStorage.setItem("@ThemeKenzieM6E1", "light");
       setTheme("light");
     }
   };
 
   useEffect(() => {
-    const localTheme = localStorage.getItem("@ThemeGetSoluções");
+    const localTheme = localStorage.getItem("@ThemeKenzieM6E1");
     localTheme && setTheme(localTheme);
   }, []);
 
