@@ -5,12 +5,11 @@ const GlobalStyle = createGlobalStyle`
             --Color-background: ${({ theme }) => theme.background};
             --Color-background-secondary: ${({ theme }) =>
               theme.backgroundSecondary};
+            --Color-button-primary: #FF577F;
+            --Color-button-secondary: ${({ theme }) => theme.buttonSecondary};
             --Color-text-primary: ${({ theme }) => theme.textPrimary};
-            --Color-text-secondary: #99df0cff;
+            --Color-text-secondary: ${({ theme }) => theme.textSecondary};
             --Color-primary: #FF577F;
-            --Color-primary-Focus: #FF427F;
-            --Color-primary-Negative: #59323F;
-            --Color-grey-4: #121214;
             --Color-grey-3: #212529;
             --Color-grey-2: #343B41;
             --Color-grey-1: #868E96;

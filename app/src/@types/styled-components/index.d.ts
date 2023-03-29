@@ -5,5 +5,7 @@ declare module "styled-components" {
     background: string;
     backgroundSecondary: string;
     textPrimary: string;
+    buttonSecondary: string;
+    textSecondary: string;
   }
 }

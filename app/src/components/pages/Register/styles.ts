@@ -18,7 +18,7 @@ const StyledRegisterPage = styled.div`
   }
 
   & > h2 {
-    color: var(--Color-grey-0);
+    color: var(--Color-text-primary);
     font-size: 15px;
     font-weight: 700;
 
@@ -79,7 +79,7 @@ const StyledList = styled.ul`
     & > div > h3 {
       font-weight: 400;
       font-size: 10px;
-      color: var(--Color-grey-0);
+      color: var(--Color-text-primary);
       @media (min-width: 768px) {
         font-size: 12px;
       }
@@ -92,7 +92,7 @@ const StyledList = styled.ul`
       height: 20px;
       color: var(--Color-grey-0);
       border-radius: 4px;
-      background-color: var(--Color-grey-1);
+      background-color: var(--Color-button-secondary);
       & > svg {
         width: 10px;
         stroke-width: 1;

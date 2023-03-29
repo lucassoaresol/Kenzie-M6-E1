@@ -5,10 +5,16 @@ const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  & > h3 {
+  button {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  h3 {
     font-weight: 700;
     font-size: 18px;
-    color: var(--Color-grey-0);
+    color: var(--Color-text-primary);
   }
   p {
     display: inline-flex;
@@ -21,7 +27,7 @@ const StyledCard = styled.div`
       font-size: 16px;
     }
   }
-  & > div {
+  div {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;

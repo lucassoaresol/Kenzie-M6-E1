@@ -41,7 +41,7 @@ const Input = ({
           }
         />
       ) : isPassword ? (
-        <StyledInputPassword>
+        <StyledInputPassword id={id}>
           <View
             inpText={
               <Text id={id} placeholder={placeholder} register={register} />

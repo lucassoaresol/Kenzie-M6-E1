@@ -17,13 +17,6 @@ const StyledDarkMode = styled.div`
   opacity: 0.5;
   transition: 0.3s;
 
-  @media (min-width: 1100px) {
-    &:hover {
-      background-color: var(--Color-text-secondary);
-      opacity: unset;
-    }
-  }
-
   & > div {
     width: 10px;
     height: 10px;

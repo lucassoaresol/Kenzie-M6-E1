@@ -17,9 +17,9 @@ const StyledButton = styled.div<iButtonProps>`
     font-size: 12px;
     color: #fff;
     border-radius: 4.06066px;
-    border: 1px solid var(--Color-grey-1);
-    background-color: var(--Color-grey-1);
-    
+    border: 1px solid var(--Color-button-secondary);
+    background-color: var(--Color-button-secondary);
+
     @media (min-width: 768px) {
       height: 48px;
       font-size: 16px;
@@ -45,8 +45,8 @@ const StyledButton = styled.div<iButtonProps>`
       switch (caseButton) {
         case "primary":
           return css`
-            background-color: var(--Color-primary);
-            border-color: var(--Color-primary);
+            background-color: var(--Color-button-primary);
+            border-color: var(--Color-button-primary);
           `;
 
         default:

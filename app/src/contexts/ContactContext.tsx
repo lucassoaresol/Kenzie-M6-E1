@@ -1,179 +1,76 @@
-import { iLogin, postLogin } from "@/services/apiLogin";
 import {
-  deleteUser,
-  patchUser,
-  patchPassword,
-  postUserCreate,
-  patchEmailUser,
-  patchPhoneUser,
-  deleteEmailUser,
-  deletePhoneUser,
-  postUserCreateEmail,
-  postUserCreatePhone,
-} from "@/services/apiUser";
+  deleteContact,
+  deleteEmailContact,
+  deletePhoneContact,
+  patchContact,
+  patchEmailContact,
+  patchPhoneContact,
+  postContactCreate,
+  postContactCreateEmail,
+  postContactCreatePhone,
+} from "@/services/apiContact";
 import { useRouter } from "next/router";
-import { destroyCookie, setCookie } from "nookies";
 import { createContext, useContext, ReactNode } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "./GlobalContext";
 
-interface iUserProps {
+interface iContactProps {
   children: ReactNode;
 }
 
-interface iUserContext {
-  login: (data: FieldValues) => Promise<void>;
-  createUser: (data: FieldValues) => Promise<void>;
-  createEmailUser: (data: FieldValues) => Promise<void>;
-  createPhoneUser: (data: FieldValues) => Promise<void>;
-  updateUser: (data: FieldValues) => Promise<void>;
-  updateUsername: (data: FieldValues) => Promise<void>;
-  updatePassword: (data: FieldValues) => Promise<void>;
-  updateEmailUser: (
+interface iContactContext {
+  createContact: (data: FieldValues) => Promise<void>;
+  createEmailContact: (
     data: FieldValues,
     id?: string,
     idSecond?: string
   ) => Promise<void>;
-  updatePhoneUser: (
+  createPhoneContact: (
     data: FieldValues,
     id?: string,
     idSecond?: string
   ) => Promise<void>;
-  destroyUser: () => Promise<void>;
-  destroyEmailUser: (id: string) => Promise<void>;
-  destroyPhoneUser: (id: string) => Promise<void>;
+  updateContact: (
+    data: FieldValues,
+    id?: string,
+    idSecond?: string
+  ) => Promise<void>;
+  updateEmailContact: (
+    data: FieldValues,
+    id?: string,
+    idSecond?: string
+  ) => Promise<void>;
+  updatePhoneContact: (
+    data: FieldValues,
+    id?: string,
+    idSecond?: string
+  ) => Promise<void>;
+  destroyContact: (id: string) => Promise<void>;
+  destroyEmailContact: (id: string, idSecond: string) => Promise<void>;
+  destroyPhoneContact: (id: string, idSecond: string) => Promise<void>;
 }
 
-const UserContext = createContext<iUserContext>({} as iUserContext);
+const ContactContext = createContext<iContactContext>({} as iContactContext);
 
-const UserProvider = ({ children }: iUserProps) => {
+const ContactProvider = ({ children }: iContactProps) => {
   const { setLoading, setOption, setSecond, setRoute, setId, setIdSecond } =
     useGlobalContext();
 
   const router = useRouter();
 
-  const login = async (data: FieldValues) => {
-    try {
-      setLoading(true);
-      const { token }: iLogin = await postLogin(data);
-      localStorage.setItem("@TokenKenzieM6E1", token);
-      setCookie(null, "@TokenKenzieM6E1", token);
-      toast.success("Login feito com sucesso!", {
-        autoClose: 900,
-      });
-      router.replace("/");
-    } catch (error) {
-      console.error(error);
-      toast.error("Combinação incorreta de e-mail/senha", {
-        autoClose: 3000,
-      });
-    } finally {
-      setOption(undefined);
-      setSecond(undefined);
-      setRoute(undefined);
-      setId(undefined);
-      setIdSecond(undefined);
-      setLoading(false);
-    }
-  };
-
-  const createUser = async (data: FieldValues) => {
-    try {
-      setLoading(true);
-      await postUserCreate(data);
-      toast.success("Conta criada com sucesso!", {
-        autoClose: 3000,
-      });
-      router.push("/");
-    } catch (error) {
-      toast.error("O login já existe", {
-        autoClose: 3000,
-      });
-    } finally {
-      setOption(undefined);
-      setSecond(undefined);
-      setRoute(undefined);
-      setId(undefined);
-      setIdSecond(undefined);
-      setLoading(false);
-    }
-  };
-
-  const createEmailUser = async (data: FieldValues) => {
+  const createContact = async (data: FieldValues) => {
     const token = localStorage.getItem("@TokenKenzieM6E1");
     if (token) {
       try {
         setLoading(true);
-        await postUserCreateEmail(token, data);
-        toast.success("Email adicionado com sucesso!", {
+        await postContactCreate(token, data);
+        toast.success("Contanto adicionado com sucesso!", {
           autoClose: 3000,
-        });
-        router.push("/");
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setOption(undefined);
-        setSecond(undefined);
-        setRoute(undefined);
-        setId(undefined);
-        setIdSecond(undefined);
-        setLoading(false);
-      }
-    } else {
-      setOption(undefined);
-      setSecond(undefined);
-      setRoute(undefined);
-      setId(undefined);
-      setIdSecond(undefined);
-      setLoading(false);
-    }
-  };
-
-  const createPhoneUser = async (data: FieldValues) => {
-    const token = localStorage.getItem("@TokenKenzieM6E1");
-    if (token) {
-      try {
-        setLoading(true);
-        await postUserCreatePhone(token, data);
-        toast.success("Contato adicionado com sucesso!", {
-          autoClose: 3000,
-        });
-        router.push("/");
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setOption(undefined);
-        setSecond(undefined);
-        setRoute(undefined);
-        setId(undefined);
-        setIdSecond(undefined);
-        setLoading(false);
-      }
-    } else {
-      setOption(undefined);
-      setSecond(undefined);
-      setRoute(undefined);
-      setId(undefined);
-      setIdSecond(undefined);
-      setLoading(false);
-    }
-  };
-
-  const updateUser = async (data: FieldValues) => {
-    const token = localStorage.getItem("@TokenKenzieM6E1");
-    if (token) {
-      try {
-        setLoading(true);
-        await patchUser(token, data);
-        toast.success("Conta alterada com sucesso!", {
-          autoClose: 900,
         });
         router.replace("/");
       } catch (error) {
-        toast.error("O login já existe", {
-          autoClose: 3000,
-        });
+        console.error(error);
       } finally {
         setOption(undefined);
         setSecond(undefined);
@@ -192,50 +89,16 @@ const UserProvider = ({ children }: iUserProps) => {
     }
   };
 
-  const updateEmailUser = async (
+  const createEmailContact = async (
     data: FieldValues,
     id?: string,
     idSecond?: string
   ) => {
     const token = localStorage.getItem("@TokenKenzieM6E1");
-    if (token && idSecond) {
+    if (token && id) {
       try {
         setLoading(true);
-        await patchEmailUser(token, data, idSecond);
-        toast.success("Email alterado com sucesso!", {
-          autoClose: 900,
-        });
-        router.replace("/");
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setOption(undefined);
-        setSecond(undefined);
-        setRoute(undefined);
-        setId(undefined);
-        setIdSecond(undefined);
-        setLoading(false);
-      }
-    } else {
-      setOption(undefined);
-      setSecond(undefined);
-      setRoute(undefined);
-      setId(undefined);
-      setIdSecond(undefined);
-      setLoading(false);
-    }
-  };
-
-  const updatePhoneUser = async (
-    data: FieldValues,
-    id?: string,
-    idSecond?: string
-  ) => {
-    const token = localStorage.getItem("@TokenKenzieM6E1");
-    if (token && idSecond) {
-      try {
-        setLoading(true);
-        await patchPhoneUser(token, data, idSecond);
+        await postContactCreateEmail(token, data, id);
         toast.success("Contato alterado com sucesso!", {
           autoClose: 900,
         });
@@ -260,22 +123,22 @@ const UserProvider = ({ children }: iUserProps) => {
     }
   };
 
-  const updateUsername = async (data: FieldValues) => {
+  const createPhoneContact = async (
+    data: FieldValues,
+    id?: string,
+    idSecond?: string
+  ) => {
     const token = localStorage.getItem("@TokenKenzieM6E1");
-    if (token) {
+    if (token && id) {
       try {
         setLoading(true);
-        await patchUser(token, data);
-        toast.success("Conta alterada com sucesso!", {
+        await postContactCreatePhone(token, data, id);
+        toast.success("Contato alterado com sucesso!", {
           autoClose: 900,
         });
-        destroyCookie(null, "@TokenKenzieM6E1");
-        localStorage.setItem("@TokenKenzieM6E1", "");
-        router.replace("/login");
+        router.replace("/");
       } catch (error) {
-        toast.error("O login já existe", {
-          autoClose: 3000,
-        });
+        console.log(error);
       } finally {
         setOption(undefined);
         setSecond(undefined);
@@ -294,22 +157,22 @@ const UserProvider = ({ children }: iUserProps) => {
     }
   };
 
-  const updatePassword = async (data: FieldValues) => {
+  const updateContact = async (
+    data: FieldValues,
+    id?: string,
+    idSecond?: string
+  ) => {
     const token = localStorage.getItem("@TokenKenzieM6E1");
-    if (token) {
+    if (token && id) {
       try {
         setLoading(true);
-        await patchPassword(token, data);
-        toast.success("Senha alterada com sucesso!", {
+        await patchContact(token, data, id);
+        toast.success("Contato alterado com sucesso!", {
           autoClose: 900,
         });
-        destroyCookie(null, "@TokenKenzieM6E1");
-        localStorage.setItem("@TokenKenzieM6E1", "");
-        router.replace("/login");
+        router.replace("/");
       } catch (error) {
-        toast.error("Senha atual incorreta!", {
-          autoClose: 3000,
-        });
+        console.log(error);
       } finally {
         setOption(undefined);
         setSecond(undefined);
@@ -328,18 +191,84 @@ const UserProvider = ({ children }: iUserProps) => {
     }
   };
 
-  const destroyUser = async () => {
+  const updateEmailContact = async (
+    data: FieldValues,
+    id?: string,
+    idSecond?: string
+  ) => {
+    const token = localStorage.getItem("@TokenKenzieM6E1");
+    if (token && id && idSecond) {
+      try {
+        setLoading(true);
+        await patchEmailContact(token, data, id, idSecond);
+        toast.success("Email alterado com sucesso!", {
+          autoClose: 900,
+        });
+        router.replace("/");
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setOption(undefined);
+        setSecond(undefined);
+        setRoute(undefined);
+        setId(undefined);
+        setIdSecond(undefined);
+        setLoading(false);
+      }
+    } else {
+      setOption(undefined);
+      setSecond(undefined);
+      setRoute(undefined);
+      setId(undefined);
+      setIdSecond(undefined);
+      setLoading(false);
+    }
+  };
+
+  const updatePhoneContact = async (
+    data: FieldValues,
+    id?: string,
+    idSecond?: string
+  ) => {
+    const token = localStorage.getItem("@TokenKenzieM6E1");
+    if (token && id && idSecond) {
+      try {
+        setLoading(true);
+        await patchPhoneContact(token, data, id, idSecond);
+        toast.success("Contato alterado com sucesso!", {
+          autoClose: 900,
+        });
+        router.replace("/");
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setOption(undefined);
+        setSecond(undefined);
+        setRoute(undefined);
+        setId(undefined);
+        setIdSecond(undefined);
+        setLoading(false);
+      }
+    } else {
+      setOption(undefined);
+      setSecond(undefined);
+      setRoute(undefined);
+      setId(undefined);
+      setIdSecond(undefined);
+      setLoading(false);
+    }
+  };
+
+  const destroyContact = async (id: string) => {
     const token = localStorage.getItem("@TokenKenzieM6E1");
     if (token) {
       try {
         setLoading(true);
-        await deleteUser(token);
-        destroyCookie(null, "@TokenKenzieM6E1");
-        localStorage.setItem("@TokenKenzieM6E1", "");
-        toast.success("Conta deletada com sucesso!", {
+        await deleteContact(id, token);
+        toast.success("Contato deletado com sucesso!", {
           autoClose: 900,
         });
-        router.replace("/login");
+        router.replace("/");
       } catch (error) {
         console.error(error);
       } finally {
@@ -360,12 +289,12 @@ const UserProvider = ({ children }: iUserProps) => {
     }
   };
 
-  const destroyEmailUser = async (id: string) => {
+  const destroyEmailContact = async (id: string, idSecond: string) => {
     const token = localStorage.getItem("@TokenKenzieM6E1");
-    if (token) {
+    if (token && id && idSecond) {
       try {
         setLoading(true);
-        await deleteEmailUser(token, id);
+        await deleteEmailContact(token, id, idSecond);
         toast.success("Email removido com sucesso!", {
           autoClose: 900,
         });
@@ -390,12 +319,12 @@ const UserProvider = ({ children }: iUserProps) => {
     }
   };
 
-  const destroyPhoneUser = async (id: string) => {
+  const destroyPhoneContact = async (id: string, idSecond: string) => {
     const token = localStorage.getItem("@TokenKenzieM6E1");
-    if (token) {
+    if (token && id && idSecond) {
       try {
         setLoading(true);
-        await deletePhoneUser(token, id);
+        await deletePhoneContact(token, id, idSecond);
         toast.success("Contato removido com sucesso!", {
           autoClose: 900,
         });
@@ -421,27 +350,24 @@ const UserProvider = ({ children }: iUserProps) => {
   };
 
   return (
-    <UserContext.Provider
+    <ContactContext.Provider
       value={{
-        login,
-        createUser,
-        createEmailUser,
-        createPhoneUser,
-        updateUser,
-        updateUsername,
-        updatePassword,
-        updateEmailUser,
-        updatePhoneUser,
-        destroyUser,
-        destroyEmailUser,
-        destroyPhoneUser,
+        createContact,
+        createEmailContact,
+        createPhoneContact,
+        updateContact,
+        updateEmailContact,
+        updatePhoneContact,
+        destroyContact,
+        destroyEmailContact,
+        destroyPhoneContact,
       }}
     >
       {children}
-    </UserContext.Provider>
+    </ContactContext.Provider>
   );
 };
 
-const useUserContext = () => useContext(UserContext);
+const useContactContext = () => useContext(ContactContext);
 
-export { UserProvider, useUserContext };
+export { ContactProvider, useContactContext };

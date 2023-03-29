@@ -18,7 +18,7 @@ const StyledLoginPage = styled.div`
   }
 
   & > h2 {
-    color: var(--Color-grey-0);
+    color: var(--Color-text-primary);
     font-size: 15px;
     font-weight: 700;
 
@@ -54,7 +54,7 @@ const StyledLoginPage = styled.div`
     & > a {
       font-weight: 600;
       font-size: 10px;
-      color: var(--Color-grey-1);
+      color: var(--Color-text-primary);
       @media (min-width: 768px) {
         font-size: 12px;
       }

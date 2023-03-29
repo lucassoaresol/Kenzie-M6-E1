@@ -1,4 +1,5 @@
 import { useGlobalContext } from "@/contexts/GlobalContext";
+import { useState } from "react";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 
 type iViewProps = {

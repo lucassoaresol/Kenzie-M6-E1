@@ -1,3 +1,5 @@
+import { iContact } from "@/services/apiContact";
+import { iEmailandPhoneNumber, iUser } from "@/services/apiUser";
 import {
   createContext,
   useContext,
@@ -15,21 +17,47 @@ interface iGlobalProps {
 interface iGlobalContext {
   theme: string;
   toggleTheme: () => void;
-  globalLoading: boolean | undefined;
-  setGlobalLoading: Dispatch<SetStateAction<boolean | undefined>>;
-  isClickMobile: boolean;
-  setIsClickMobile: Dispatch<SetStateAction<boolean>>;
   isView: boolean;
   setIsView: Dispatch<SetStateAction<boolean>>;
+  elem: iUser | iContact | undefined;
+  setElem: Dispatch<SetStateAction<iUser | iContact | undefined>>;
+  elemSecond: iEmailandPhoneNumber | undefined;
+  setElemSecond: Dispatch<SetStateAction<iEmailandPhoneNumber | undefined>>;
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  option: "update" | "delete" | "create" | undefined;
+  setOption: Dispatch<
+    SetStateAction<"update" | "delete" | "create" | undefined>
+  >;
+  second: "fullName" | "username" | "password" | "email" | "phone" | undefined;
+  setSecond: Dispatch<
+    SetStateAction<
+      "fullName" | "username" | "password" | "email" | "phone" | undefined
+    >
+  >;
+  route: "user" | "contact" | undefined;
+  setRoute: Dispatch<SetStateAction<"user" | "contact" | undefined>>;
+  id: string | undefined;
+  setId: Dispatch<SetStateAction<string | undefined>>;
+  idSecond: string | undefined;
+  setIdSecond: Dispatch<SetStateAction<string | undefined>>;
 }
 
 const GlobalContext = createContext<iGlobalContext>({} as iGlobalContext);
 
 const GlobalProvider = ({ children }: iGlobalProps) => {
   const [theme, setTheme] = useState("light");
-  const [globalLoading, setGlobalLoading] = useState<boolean>();
-  const [isClickMobile, setIsClickMobile] = useState(false);
   const [isView, setIsView] = useState(false);
+  const [elem, setElem] = useState<iUser | iContact>();
+  const [elemSecond, setElemSecond] = useState<iEmailandPhoneNumber>();
+  const [loading, setLoading] = useState(false);
+  const [option, setOption] = useState<"create" | "update" | "delete">();
+  const [second, setSecond] = useState<
+    "fullName" | "username" | "password" | "email" | "phone"
+  >();
+  const [route, setRoute] = useState<"user" | "contact">();
+  const [id, setId] = useState<string>();
+  const [idSecond, setIdSecond] = useState<string>();
 
   const toggleTheme = () => {
     if (theme === "light") {
@@ -51,12 +79,24 @@ const GlobalProvider = ({ children }: iGlobalProps) => {
       value={{
         theme,
         toggleTheme,
-        globalLoading,
-        setGlobalLoading,
-        isClickMobile,
-        setIsClickMobile,
         isView,
         setIsView,
+        elem,
+        setElem,
+        elemSecond,
+        setElemSecond,
+        loading,
+        setLoading,
+        option,
+        setOption,
+        route,
+        setRoute,
+        second,
+        setSecond,
+        id,
+        setId,
+        idSecond,
+        setIdSecond,
       }}
     >
       {children}

@@ -15,6 +15,7 @@ const Action = ({ isLogout }: iActionProps) => {
           type="button"
           onClick={() => {
             destroyCookie(null, "@TokenKenzieM6E1");
+            localStorage.setItem("@TokenKenzieM6E1", "");
             router.replace("/login");
           }}
         >

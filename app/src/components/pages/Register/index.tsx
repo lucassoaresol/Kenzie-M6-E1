@@ -1,4 +1,3 @@
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, useFieldArray } from "react-hook-form";
 import { VscAdd, VscRemove } from "react-icons/vsc";
@@ -7,46 +6,10 @@ import Header from "@/components/Header";
 import Input from "@/components/Input";
 import Text from "@/components/Input/Text";
 import ErrorsMessage from "@/components/Input/ErrorsMessage";
-import Loading from "@/components/Loading";
-import StyledPage from "@/styles/pages";
+import { StyledPage } from "@/styles/pages";
 import { StyledRegisterPage, StyledList } from "./styles";
 import { useUserContext } from "@/contexts/UserContext";
-
-const schema = yup.object({
-  fullName: yup.string().required("Nome Completo é obrigatório"),
-  username: yup.string().required("Login é obrigatório"),
-  password: yup.string().required("Senha é obrigatório"),
-  confirmPassword: yup
-    .string()
-    .oneOf(
-      [yup.ref("password")],
-      "Confirmação de senha deve ser igual a senha"
-    ),
-  listEmail: yup
-    .array()
-    .of(
-      yup.object({
-        email: yup
-          .string()
-          .email("Email deve ser um email válido")
-          .required("Email é obrigatório"),
-      })
-    )
-    .required()
-    .min(1),
-  listPhoneNumber: yup
-    .array()
-    .of(
-      yup.object({
-        phoneNumber: yup
-          .string()
-          .matches(/^[0-9]+$/, { message: "Digite apenas números" })
-          .required("Contato é obrigatório"),
-      })
-    )
-    .required()
-    .min(1),
-});
+import createUserSchema from "@/validations/createUser";
 
 const RegisterPage = () => {
   const { createUser } = useUserContext();
@@ -66,7 +29,7 @@ const RegisterPage = () => {
       listEmail: [{ email: "" }],
       listPhoneNumber: [{ phoneNumber: "" }],
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(createUserSchema),
   });
 
   const listEmail = useFieldArray({
@@ -201,7 +164,6 @@ const RegisterPage = () => {
           </form>
         </StyledRegisterPage>
       </StyledPage>
-      <Loading />
     </div>
   );
 };

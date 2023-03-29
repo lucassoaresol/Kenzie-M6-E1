@@ -8,10 +8,20 @@ const StyledDiv = styled.div`
   & > label {
     font-weight: 400;
     font-size: 10px;
-    color: var(--Color-grey-0);
+    color: var(--Color-text-primary);
     @media (min-width: 768px) {
       font-size: 12px;
     }
+  }
+  #username {
+    text-transform: lowercase;
+  }
+  #username::placeholder {
+    text-transform: initial;
+  }
+
+  #oldPassword > span {
+    display: none;
   }
 `;
 
