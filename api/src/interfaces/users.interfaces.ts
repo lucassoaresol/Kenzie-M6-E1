@@ -17,7 +17,11 @@ export interface IUserRequest {
 export interface IUserUpdateRequest {
   fullName?: string;
   username?: string;
-  password?: string;
+}
+
+export interface IUserUpdatePasswordRequest {
+  oldPassword: string;
+  password: string;
 }
 
 export interface IUserResponse {
@@ -26,6 +30,6 @@ export interface IUserResponse {
   username: string;
   listEmail: Array<IEmailResponse>;
   listPhoneNumber: Array<IPhoneResponse>;
-  contacts:Array<IContactResponse>
+  contacts: Array<IContactResponse>;
   createdAt: Date;
 }

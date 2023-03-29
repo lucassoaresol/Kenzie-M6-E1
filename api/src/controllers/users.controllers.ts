@@ -3,6 +3,7 @@ import createUserService from '../services/users/createUser.service';
 import deleteUserService from '../services/users/deleteUser.service';
 import retrieveUserService from '../services/users/retrieveUser.service';
 import updateUserService from '../services/users/updateUser.service';
+import updateUserPasswordService from '../services/users/updateUserPassword.service';
 
 const createUserController = async (req: Request, res: Response) => {
   const user = await createUserService(req.body);
@@ -19,6 +20,11 @@ const updateUserController = async (req: Request, res: Response) => {
   return res.json(user);
 };
 
+const updateUserPasswordController = async (req: Request, res: Response) => {
+  const user = await updateUserPasswordService(req.body, req.user.id);
+  return res.json(user);
+};
+
 const deleteUserController = async (req: Request, res: Response) => {
   await deleteUserService(req.user.id);
   return res.status(204).json({});
@@ -28,5 +34,6 @@ export {
   createUserController,
   retrieveUserController,
   updateUserController,
+  updateUserPasswordController,
   deleteUserController,
 };

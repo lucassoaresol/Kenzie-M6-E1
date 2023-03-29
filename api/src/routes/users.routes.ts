@@ -15,6 +15,7 @@ import {
   retrieveUserController,
   updateUserController,
   deleteUserController,
+  updateUserPasswordController,
 } from '../controllers/users.controllers';
 import ensureAuthMiddleware from '../middlewares/ensureAuth.middleware';
 import ensureDataIsValidMiddleware from '../middlewares/ensureDataIsValid.middleware';
@@ -23,6 +24,7 @@ import { emailSerializer } from '../serializers/email.serializes';
 import { phoneSerializer } from '../serializers/phone.serializes';
 import {
   userSerializer,
+  userUpdatePasswordSerializer,
   userUpdateSerializer,
 } from '../serializers/user.serializes';
 
@@ -45,6 +47,13 @@ userRouter.patch(
   ensureUserTokenIsExistMiddleware,
   ensureDataIsValidMiddleware(userUpdateSerializer),
   updateUserController,
+);
+userRouter.patch(
+  '/password',
+  ensureAuthMiddleware,
+  ensureUserTokenIsExistMiddleware,
+  ensureDataIsValidMiddleware(userUpdatePasswordSerializer),
+  updateUserPasswordController,
 );
 userRouter.delete(
   '',

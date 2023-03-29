@@ -1,4 +1,3 @@
-import { hashSync } from 'bcryptjs';
 import AppError from '../../errors/AppError';
 import { IUserUpdateRequest } from '../../interfaces/users.interfaces';
 import prisma from '../../prisma';
@@ -8,10 +7,6 @@ const updateUserService = async (
   userData: IUserUpdateRequest,
   userId: string,
 ) => {
-  if (userData.password) {
-    userData.password = hashSync(userData.password, 10);
-  }
-  
   if (userData.username) {
     const username = await prisma.user.findUnique({
       where: { username: userData.username },

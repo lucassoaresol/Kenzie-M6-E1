@@ -3,6 +3,7 @@ import { SchemaOf } from 'yup';
 import {
   IUserRequest,
   IUserResponse,
+  IUserUpdatePasswordRequest,
   IUserUpdateRequest,
 } from '../interfaces/users.interfaces';
 import { contactResponserSerializer } from './contact.serializes';
@@ -21,11 +22,17 @@ const userUpdateSerializer: SchemaOf<IUserUpdateRequest> = yup
   .object()
   .shape({
     fullName: yup.string(),
-    password: yup.string(),
     username: yup.string(),
   })
   .noUnknown(true)
   .nullable();
+
+const userUpdatePasswordSerializer: SchemaOf<IUserUpdatePasswordRequest> = yup
+  .object()
+  .shape({
+    oldPassword: yup.string().required(),
+    password: yup.string().required(),
+  });
 
 const userResponserSerializer: SchemaOf<IUserResponse> = yup.object().shape({
   createdAt: yup.date(),
@@ -37,4 +44,9 @@ const userResponserSerializer: SchemaOf<IUserResponse> = yup.object().shape({
   id: yup.string().uuid(),
 });
 
-export { userSerializer, userUpdateSerializer, userResponserSerializer };
+export {
+  userSerializer,
+  userUpdateSerializer,
+  userUpdatePasswordSerializer,
+  userResponserSerializer,
+};
