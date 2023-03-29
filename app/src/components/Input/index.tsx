@@ -9,7 +9,7 @@ import Password from "./Password";
 import View from "./View";
 import { StyledDiv, StyledInputPassword } from "./styles";
 
-type iInputProps = {
+interface iInputProps {
   id: string;
   name: string;
   placeholder: string;
@@ -17,7 +17,7 @@ type iInputProps = {
   errors: FieldErrors<FieldValues>;
   isPassword?: boolean;
   isConfirm?: boolean;
-};
+}
 
 const Input = ({
   id,

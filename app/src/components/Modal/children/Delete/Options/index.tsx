@@ -1,7 +1,6 @@
 import { useContactContext } from "@/contexts/ContactContext";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 import { useUserContext } from "@/contexts/UserContext";
-import React from "react";
 
 const Options = () => {
   const { destroyUser, destroyEmailUser, destroyPhoneUser } = useUserContext();

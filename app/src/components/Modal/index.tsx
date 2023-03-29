@@ -4,12 +4,12 @@ import { StyledModal } from "./styles";
 import { AiOutlineClose } from "react-icons/ai";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 
-type iModalProps = {
+interface iModalProps {
   name: string;
   elemInfo?: string;
   children?: ReactNode;
   isDelete?: boolean;
-};
+}
 
 const Modal = ({ name, elemInfo, children, isDelete }: iModalProps) => {
   const { setOption, setRoute, setId, setIdSecond } = useGlobalContext();

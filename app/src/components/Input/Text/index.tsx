@@ -1,11 +1,11 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { StyledInput } from "../styles";
 
-type iTextProps = {
+interface iTextProps {
   id?: string;
   placeholder: string;
   register: UseFormRegisterReturn<string>;
-};
+}
 
 const Text = ({ id, placeholder, register }: iTextProps) => {
   return (

@@ -2,9 +2,9 @@ import { useRouter } from "next/router";
 import { destroyCookie } from "nookies";
 import { StyledAction } from "./styles";
 
-type iActionProps = {
+interface iActionProps {
   isLogout?: boolean;
-};
+}
 
 const Action = ({ isLogout }: iActionProps) => {
   const router = useRouter();

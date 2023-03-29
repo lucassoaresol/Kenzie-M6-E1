@@ -1,12 +1,11 @@
 import { useGlobalContext } from "@/contexts/GlobalContext";
-import { useState } from "react";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 
-type iViewProps = {
+interface iViewProps {
   inpText: JSX.Element;
   inpPassword: JSX.Element;
   isPassword?: boolean;
-};
+}
 
 const View = ({ inpText, inpPassword, isPassword }: iViewProps) => {
   const { isView, setIsView } = useGlobalContext();

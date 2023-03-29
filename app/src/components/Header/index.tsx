@@ -3,10 +3,10 @@ import Action from "./Action";
 import DarkMode from "./DarkMode";
 import { StyledHeader } from "./styles";
 
-type iHeaderProps = {
+interface iHeaderProps {
   isRegister?: boolean;
   isLogout?: boolean;
-};
+}
 
 const Header = ({ isRegister, isLogout }: iHeaderProps) => {
   return (

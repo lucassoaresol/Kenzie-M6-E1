@@ -2,8 +2,8 @@ import { useGlobalContext } from "@/contexts/GlobalContext";
 import { StyledLoading } from "./style";
 
 const Loading = () => {
-  const { globalLoading } = useGlobalContext();
-  return <>{globalLoading && <StyledLoading>Loading...</StyledLoading>}</>;
+  const { loading } = useGlobalContext();
+  return <>{loading && <StyledLoading>Loading...</StyledLoading>}</>;
 };
 
 export default Loading;

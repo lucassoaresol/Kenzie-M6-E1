@@ -36,20 +36,20 @@ export interface iUserUpdate {
 }
 
 export async function postUserCreate(data: FieldValues) {
-  return await api.post("users", data);
+  await api.post("users", data);
 }
 
 export async function postUserCreateEmail(token: string, data: FieldValues) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  return await api.post("users/email", data);
+  await api.post("users/email", data);
 }
 
 export async function postUserCreatePhone(token: string, data: FieldValues) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  return await api.post("users/phone", data);
+  await api.post("users/phone", data);
 }
 
-export async function getUser(token: string) {
+export async function getUser(token: string): Promise<iUser> {
   api.defaults.headers.authorization = `Bearer ${token}`;
   const { data } = await api.get<iUser>("users");
   return data;
@@ -57,8 +57,7 @@ export async function getUser(token: string) {
 
 export async function patchUser(token: string, dataPatch: FieldValues) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  const { data } = await api.patch<iUserUpdate>("users", dataPatch);
-  return data;
+  await api.patch("users", dataPatch);
 }
 
 export async function patchEmailUser(
@@ -67,8 +66,7 @@ export async function patchEmailUser(
   id: string
 ) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  const { data } = await api.patch<iUserUpdate>(`users/email/${id}`, dataPatch);
-  return data;
+  await api.patch(`users/email/${id}`, dataPatch);
 }
 
 export async function patchPhoneUser(
@@ -77,14 +75,12 @@ export async function patchPhoneUser(
   id: string
 ) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  const { data } = await api.patch<iUserUpdate>(`users/phone/${id}`, dataPatch);
-  return data;
+  await api.patch(`users/phone/${id}`, dataPatch);
 }
 
 export async function patchPassword(token: string, dataPatch: FieldValues) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  const { data } = await api.patch<iUserUpdate>("users/password", dataPatch);
-  return data;
+  await api.patch("users/password", dataPatch);
 }
 
 export async function deleteUser(token: string) {

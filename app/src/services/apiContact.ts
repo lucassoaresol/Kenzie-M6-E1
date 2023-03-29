@@ -13,7 +13,7 @@ export interface iContact {
 
 export async function postContactCreate(token: string, data: FieldValues) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  return await api.post("contacts", data);
+  await api.post("contacts", data);
 }
 
 export async function postContactCreateEmail(
@@ -22,7 +22,7 @@ export async function postContactCreateEmail(
   id: string
 ) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  return await api.post(`contacts/${id}/email`, data);
+  await api.post(`contacts/${id}/email`, data);
 }
 
 export async function postContactCreatePhone(
@@ -31,7 +31,7 @@ export async function postContactCreatePhone(
   id: string
 ) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  return await api.post(`contacts/${id}/phone`, data);
+  await api.post(`contacts/${id}/phone`, data);
 }
 
 export async function patchContact(
@@ -40,8 +40,7 @@ export async function patchContact(
   id: string
 ) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  const { data } = await api.patch(`contacts/${id}`, dataPatch);
-  return data;
+  await api.patch(`contacts/${id}`, dataPatch);
 }
 
 export async function patchEmailContact(
@@ -51,11 +50,7 @@ export async function patchEmailContact(
   emailId: string
 ) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  const { data } = await api.patch(
-    `contacts/${contactId}/email/${emailId}`,
-    dataPatch
-  );
-  return data;
+  await api.patch(`contacts/${contactId}/email/${emailId}`, dataPatch);
 }
 
 export async function patchPhoneContact(
@@ -65,11 +60,7 @@ export async function patchPhoneContact(
   phoneId: string
 ) {
   api.defaults.headers.authorization = `Bearer ${token}`;
-  const { data } = await api.patch(
-    `contacts/${contactId}/phone/${phoneId}`,
-    dataPatch
-  );
-  return data;
+  await api.patch(`contacts/${contactId}/phone/${phoneId}`, dataPatch);
 }
 
 export async function deleteContact(id: string, token: string) {

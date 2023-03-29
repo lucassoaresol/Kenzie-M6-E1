@@ -1,14 +1,13 @@
 import Link from "next/link";
-import React from "react";
 import { StyledButton } from "./styles";
 
-type iButtonProps = {
+interface iButtonProps {
   name: string;
   type?: "button" | "submit" | "reset";
   caseButton?: "primary";
   isLink?: boolean;
   location?: string;
-};
+}
 
 const Button = ({ name, type, caseButton, isLink, location }: iButtonProps) => {
   return (

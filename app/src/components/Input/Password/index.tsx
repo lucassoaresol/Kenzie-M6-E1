@@ -1,11 +1,11 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { StyledInput } from "../styles";
 
-type iPasswordProps = {
+interface iPasswordProps {
   id: string;
   placeholder: string;
   register: UseFormRegisterReturn<string>;
-};
+}
 
 const Password = ({ id, placeholder, register }: iPasswordProps) => {
   return (
